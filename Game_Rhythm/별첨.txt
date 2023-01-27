@@ -1,0 +1,14 @@
+회원가입 : 
+Textfile, password에 적혀있는 것들을 가져와서 Client가 TCP로 Server로 회원가입 요청을 아이디, 비밀번호, 이름, 재비밀번호 보냄 -> Server에서 받아서 중복없으면 Map에 저장하고 true 아니면 false를 TCP로 다시 Client로 보내줌 -> Client에서 String으로 받아서 true, false에 따라 아이디생성과 중복되었음을 알림
+
+로그인 : 
+Panel에 적은 nick과 pass를 받아 Client가 Server에 TCP로 nick과 pass를 보냄 -> Server에서 회원가입할 때 저장된 맵에 nick이 포함되어있는지 확인하고 비밀번호가 일치하는지 확인한 후 Client에게 TCP로 true, false로 보내줌 -> Client에서 String으로 받아 틀리면 다시 입력, 맞으면 Roompanel로 넘어감 추가적으로 로그인 할때마다 유저 목록 갱신함.
+
+로그인 유저목록과 내정보 갱신 or 변경 :
+유저목록을 갱신하기 위해 Client에서 Server로 TCP로 요청을 보냄 -> Server에서 Set 컬렉션에 저장되어있는 현재 접속중인 유저 목록을 TCP로 다시 보냄 -> Client에서 Set 컬렉션으로 받아서 접속중인 유저를 Roompanel의 List에 하나씩 nick과 정보를 띄워줌
+
+방 생성 :
+방제목과, 방 비밀번호(있을수도 없을수도있음), 비밀번호방이 아니면 false, 비밀번호 방이면 true로 받아 Client에서 TCP로 Server로 보냄 -> Server에서 방이 꽉차있는지 확인하고, 비밀번호 방인지 구분하고, 방이 생성가능하면 Room list에 현재유저와 방이름을 저장시키고 그 Room의 번호를 가져와서 TCP로 Client에게 보내주고 UDP로 Client에게 방리스트를 갱신하라고 보냄 -> Client에서 TCP로 Room을 받아 null이면 방없음, 비밀번호 방인지 아닌지 확인하고 방내부 띄워줌
+
+방 입장 :
+방입장시 그 방번호를 저장하여 Client에서 Server로 방번호를 TCP로 보내줌 -> Server에서 방번호를 받아서 현재
